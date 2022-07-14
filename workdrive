@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+#__________________//Personal workdrive mirror script for//____________________#
+#______      ______                                           _           _____#
+#_____      / ____ \________ _   ______ ___  ____  __________(_)____       ____#
+#____      / / __ `/ ___/ _ \ | / / __ `__ \/ __ \/ ___/ ___/ / ___/      _____#
+#___      / / /_/ (__  )  __/ |/ / / / / / / /_/ / /  / /  / (__  )      ______#
+#____     \ \__,_/____/\___/|___/_/ /_/ /_/\____/_/  /_/  /_/____/      _______#
+#_____     \____/                                                      ________#
+#______________________________________________________________________________#
+############# Quickly mirrors my work drive to a duplicate drive ###############
+
+#@@@@@@@^^~~~~~~~~~~~~~~~~~~~~^@@@@@@@@@#
+#@@@@@@^     ~^  @  @@ @ @ @ I  ~^@@@@@@#
+#@@@@@            ~ ~~ ~I          @@@@@#
+#@@@@'                  '  _,w@<    @@@@#
+#@@@@     @@@@@@@@w___,w@@@@@@@@  @  @@@#
+#@@@@     @@@@@@@@@@@@@@@@@@@@@@  I  @@@#
+#@@@@     @@@@@@@@@@@@@@@@@@@@*@[ i  @@@#
+#@@@@     @@@@@@@@@@@@@@@@@@@@[][ | ]@@@#
+#@@@@     ~_,,_ ~@@@@@@@~ ____~ @    @@@#
+#@@@@    _~ ,  ,  `@@@~  _  _`@ ]L  J@@@#
+#@@@@  , @@w@ww+   @@@ww``,,@w@ ][  @@@@#
+#@@@@,  @@@@www@@@ @@@@@@@ww@@@@@[  @@@@#
+#@@@@@_|| @@@@@@P' @@P@@@@@@@@@@@[|c@@@@#
+#@@@@@@w| '@@P~  P]@@@-~, ~Y@@^'],@@@@@@#
+#@@@@@@@[   _        _J@@Tk     ]]@@@@@@#
+#@@@@@@@@,@ @@, c,,,,,,,y ,w@@[ ,@@@@@@@#
+#@@@@@@@@@ i @w   ====--_@@@@@  @@@@@@@@#
+#@@@@@@@@@@`,P~ _ ~^^^^Y@@@@@  @@@@@@@@@#
+#@@@@^^=^@@^   ^' ,ww,w@@@@@ _@@@@@@@@@@#
+#@@@_xJ~ ~   ,    @@@@@@@P~_@@@@@@@@@@@@#
+#@@   @,   ,@@@,_____   _,J@@@@@@@@@@@@@#
+#@@L  `' ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#
+
+## Text formatting
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+reset=$(tput sgr0)
+
+#rsync -a -v --delete --force --exclude 'ARCHIVE SOURCE' --exclude '.fseventsd' --exclude '.Trashes' --exclude '.DS_Store' --exclude '.Spotlight-V100' /Volumes/Working/ /Volumes/Working_backup/
+
+# Sync my working drive with the identical backup, excluding some unnecessary files
+sudo rsync -a --info=progress2 --delete --exclude 'ARCHIVE SOURCE' --exclude '.fseventsd' --exclude '.Trashes' --exclude '.DS_Store' --exclude '.Spotlight-V100' --exclude '.TemporaryItems' /Volumes/Working/ /Volumes/Working_backup/
+
+echo "---"
+echo "${bold}${yellow}Work drive backup complete!${reset}"
+echo "workdrive " `date +"%y%m%d %r"` >> ~/Library/Logs/manual-backups.log
+echo "---"
