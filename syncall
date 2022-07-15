@@ -25,7 +25,7 @@ log() {
 }
 
 #-------------------------------------------------------------------------------
-logn "Syncing dotfiles to macstrap:"
+log "Syncing dotfiles to macstrap:"
 echo ""
 sleep 1
 
