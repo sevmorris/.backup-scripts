@@ -79,10 +79,14 @@ cleanup() {
   fi
 }
 
-EXIT
+trap "cleanup" EXIT
 
-SYNC_QUIET_FLAG="-q"
-Q="$SYNC_QUIET_FLAG"
+if [ -n "$SYNC_DEBUG" ]; then
+  set -x
+else
+  SYNC_QUIET_FLAG="-q"
+  Q="$SYNC_QUIET_FLAG"
+fi
 
 STDIN_FILE_DESCRIPTOR="0"
 [ -t "$STDIN_FILE_DESCRIPTOR" ] && SYNC_INTERACTIVE="1"
@@ -90,6 +94,17 @@ STDIN_FILE_DESCRIPTOR="0"
 # We want to always prompt for sudo password at least once rather than doing
 # root stuff unexpectedly
 sudo --reset-timestamp
+
+# functions for turning off debug for use when handling the user password
+clear_debug() {
+  set +x
+}
+
+reset_debug() {
+  if [ -n "$SYNC_DEBUG" ]; then
+    set -x
+  fi
+}
 
 # Initialise (or reinitialise) sudo to save unhelpful prompts later
 sudo_init() {
@@ -111,6 +126,7 @@ sudo_init() {
       echo "!!! Wrong password!" >&2
     done
 
+    clear_debug
     SUDO_PASSWORD_SCRIPT="$(
       cat <<ZSH
 #!/bin/zsh
@@ -139,6 +155,7 @@ pushit() {
 }
 
 sudo_refresh() {
+  clear_debug
   if [ -n "$SUDO_ASKPASS" ]; then
     sudo --askpass --validate
   else
