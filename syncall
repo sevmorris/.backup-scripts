@@ -58,76 +58,6 @@
 #THE SOFTWARE.
 #-------------------------------------------------------------------------------
 
-sudo_askpass() {
-  if [ -n "$SUDO_ASKPASS" ]; then
-    sudo --askpass "$@"
-  else
-    sudo "$@"
-  fi
-}
-
-cleanup() {
-  set +e
-  sudo_askpass rm -rf "$SUDO_ASKPASS" "$SUDO_ASKPASS_DIR"
-  sudo --reset-timestamp
-  if [ -z "$SYNC_SUCCESS" ]; then
-    if [ -n "$SYNC_STEP" ]; then
-      echo "!!! $SYNC_STEP FAILED" >&2
-    else
-      echo "!!! FAILED" >&2
-    fi
-  fi
-}
-
-EXIT
-
-SYNC_QUIET_FLAG="-q"
-Q="$SYNC_QUIET_FLAG"
-
-STDIN_FILE_DESCRIPTOR="0"
-[ -t "$STDIN_FILE_DESCRIPTOR" ] && SYNC_INTERACTIVE="1"
-
-# We want to always prompt for sudo password at least once rather than doing
-# root stuff unexpectedly
-sudo --reset-timestamp
-
-# Initialise (or reinitialise) sudo to save unhelpful prompts later
-sudo_init() {
-  if [ -z "$SYNC_INTERACTIVE" ]; then
-    return
-  fi
-
-  local SUDO_PASSWORD SUDO_PASSWORD_SCRIPT
-
-  if ! sudo --validate --non-interactive &>/dev/null; then
-    while true; do
-      read -rsp "--> Enter your password (for sudo access):" SUDO_PASSWORD
-      echo
-      if sudo --validate --stdin 2>/dev/null <<<"$SUDO_PASSWORD"; then
-        break
-      fi
-
-      unset SUDO_PASSWORD
-      echo "!!! Wrong password!" >&2
-    done
-
-    SUDO_PASSWORD_SCRIPT="$(
-      cat <<ZSH
-#!/bin/zsh
-echo "$SUDO_PASSWORD"
-ZSH
-    )"
-    unset SUDO_PASSWORD
-    SUDO_ASKPASS_DIR="$(mktemp -d)"
-    SUDO_ASKPASS="$(mktemp "$SUDO_ASKPASS_DIR"/SYNC-askpass-XXXXXXXX)"
-    chmod 700 "$SUDO_ASKPASS_DIR" "$SUDO_ASKPASS"
-    zsh -c "cat > '$SUDO_ASKPASS'" <<<"$SUDO_PASSWORD_SCRIPT"
-    unset SUDO_PASSWORD_SCRIPT
-    reset_debug
-
-    export SUDO_ASKPASS
-  fi
-}
 
 # Push current directory to Github
 pushit() {
@@ -136,21 +66,6 @@ pushit() {
   git add . 2>&1
   git commit -m "${DATE}" 2>&1
   git push 2>&1
-}
-
-sudo_refresh() {
-  if [ -n "$SUDO_ASKPASS" ]; then
-    sudo --askpass --validate
-  else
-    sudo_init
-  fi
-  reset_debug
-}
-
-abort() {
-  SYNC_STEP=""
-  echo "!!! $*" >&2
-  exit 1
 }
 
 log() {
@@ -169,10 +84,6 @@ logk() {
   SYNC_STEP=""
   echo "OK"
 }
-
-[ "$USER" = "root" ] && abort "Run syncall as yourself, not root."
-groups | grep $Q -E "\b(admin)\b" || abort "Add $USER to the admin group."
-
 
 #-------------------------------------------------------------------------------
 logn "Syncing dotfiles to macstrap:"
