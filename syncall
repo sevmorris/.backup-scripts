@@ -34,8 +34,6 @@ sleep 1
 # Note that this is one-way and I should only ever edit files in ~/.dotfiles
 sudo rsync -rtu --exclude '.git' ~/.dotfiles/ ~/macstrap/dotfiles/ --progress
 sudo rsync -rtu --exclude '.git' ~/.backup-scripts/ ~/macstrap/scripts/backup-scripts/ --progress
-
-log
 sleep 1
 
 #-------------------------------------------------------------------------------
@@ -43,17 +41,14 @@ sleep 1
 
 echo "" && echo "Pushing .dotfiles to Github"
 cd ~/.dotfiles && pushit
-log
 sleep 0.5
 
 echo "" && echo "Pushing .backup-scripts to Github"
 cd ~/.backup-scripts && pushit
-log
 sleep 0.5
 
 echo "" && echo "Pushing macstrap to Github"
 cd ~/macstrap && pushit
-log
 sleep 0.5
 
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
