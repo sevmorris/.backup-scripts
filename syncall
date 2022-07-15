@@ -55,6 +55,3 @@ cd ~/macstrap && pushit
 sleep 0.5
 
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
-
-#-------------------------------------------------------------------------------
-arrow "Completed!"
