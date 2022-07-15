@@ -38,15 +38,15 @@ sleep 1
 #-------------------------------------------------------------------------------
 # Push repos to Github using function pushit, which is located in .zshrc
 
-echo "" && echo "Pushing .dotfiles to Github"
+echo "" && arrow "Pushing .dotfiles to Github"
 cd ~/.dotfiles && pushit
 sleep 0.5
 
-echo "" && echo "Pushing .backup-scripts to Github"
+echo "" && arrow "Pushing .backup-scripts to Github"
 cd ~/.backup-scripts && pushit
 sleep 0.5
 
-echo "" && echo "Pushing macstrap to Github"
+echo "" && arrow "Pushing macstrap to Github"
 cd ~/macstrap && pushit
 sleep 0.5
 
