@@ -70,13 +70,11 @@ pushit() {
 
 log() {
   SYNC_STEP="$*"
-  sudo_refresh
   echo "--> $*"
 }
 
 logn() {
   SYNC_STEP="$*"
-  sudo_refresh
   printf -- "--> %s " "$*"
 }
 
