@@ -28,7 +28,7 @@ arrow() {
 }
 
 #-------------------------------------------------------------------------------
-echo "Syncing dotfiles to macstrap"
+arrow "Syncing dotfiles to macstrap"
 echo ""
 sleep 1
 
