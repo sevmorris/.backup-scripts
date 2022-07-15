@@ -47,7 +47,7 @@ pushit() {
 }
 
 #-------------------------------------------------------------------------------
-echo && echo "Syncing ${yellow}~/dotfiles to ~/macstrap${reset}" && echo
+echo && echo "${yellow}Syncing ~/dotfiles to ~/macstrap${reset}" && echo
 sleep 1
 
 # sync system dotfiles & backup scriptswith macstrap since they should match,
