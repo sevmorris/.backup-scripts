@@ -72,4 +72,8 @@ echo "" && echo "${yellow}Pushing ~/macstrap to Github${reset}"
 cd ~/macstrap && pushit
 sleep 0.5
 
+echo "" && echo "${yellow}Pushing ~/zmac to Github${reset}"
+cd ~/zmac && pushit
+sleep 0.5
+
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
