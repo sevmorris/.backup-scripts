@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -x
+
 #____________________//Personal sync script for//______________________________#
 #______      ______                                           _           _____#
 #_____      / ____ \________ _   ______ ___  ____  __________(_)____       ____#
@@ -57,8 +59,6 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 #-------------------------------------------------------------------------------
-
-set +x
 
 sudo_askpass() {
   if [ -n "$SUDO_ASKPASS" ]; then
