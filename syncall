@@ -19,13 +19,13 @@ pushit() {
   git push 2>&1
 }
 
-log() {
-  SYNC_STEP="$*"
-  echo "--> $*"
+# Just a little arrow
+arrow() {
+  echo "--> "
 }
 
 #-------------------------------------------------------------------------------
-log "Syncing dotfiles to macstrap:"
+arrow "Syncing dotfiles to macstrap:"
 echo ""
 sleep 1
 
@@ -54,4 +54,4 @@ sleep 0.5
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
 
 #-------------------------------------------------------------------------------
-log "Completed!"
+arrow "Completed!"
