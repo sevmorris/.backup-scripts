@@ -1,5 +1,14 @@
 
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+
+#____________________//Personal sync script for//______________________________#
+#______      ______                                           _           _____#
+#_____      / ____ \________ _   ______ ___  ____  __________(_)____       ____#
+#____      / / __ `/ ___/ _ \ | / / __ `__ \/ __ \/ ___/ ___/ / ___/      _____#
+#___      / / /_/ (__  )  __/ |/ / / / / / / /_/ / /  / /  / (__  )      ______#
+#____     \ \__,_/____/\___/|___/_/ /_/ /_/\____/_/  /_/  /_/____/      _______#
+#_____     \____/                                                      ________#
+#______________________________________________________________________________#
 
 # Much of this code was repurposed from Mike McQuaid's Strap repository
 # https://github.com/MikeMcQuaid/strap
@@ -50,24 +59,6 @@
 #THE SOFTWARE.
 #-------------------------------------------------------------------------------
 
-#____________________//Personal sync script for//______________________________#
-#______      ______                                           _           _____#
-#_____      / ____ \________ _   ______ ___  ____  __________(_)____       ____#
-#____      / / __ `/ ___/ _ \ | / / __ `__ \/ __ \/ ___/ ___/ / ___/      _____#
-#___      / / /_/ (__  )  __/ |/ / / / / / / /_/ / /  / /  / (__  )      ______#
-#____     \ \__,_/____/\___/|___/_/ /_/ /_/\____/_/  /_/  /_/____/      _______#
-#_____     \____/                                                      ________#
-#______________________________________________________________________________#
-
-
-## Text formatting
-red=$(tput setaf 1)
-green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-blue=$(tput setaf 33)
-cyan=$(tput setaf 37)
-bold=$(tput bold)
-reset=$(tput sgr0)
 
 sudo_askpass() {
   if [ -n "$SUDO_ASKPASS" ]; then
@@ -142,16 +133,16 @@ sudo_init() {
 
     clear_debug
     SUDO_PASSWORD_SCRIPT="$(
-      cat <<BASH
-#!/bin/bash
+      cat <<ZSH
+#!/bin/zsh
 echo "$SUDO_PASSWORD"
-BASH
+ZSH
     )"
     unset SUDO_PASSWORD
     SUDO_ASKPASS_DIR="$(mktemp -d)"
     SUDO_ASKPASS="$(mktemp "$SUDO_ASKPASS_DIR"/SYNC-askpass-XXXXXXXX)"
     chmod 700 "$SUDO_ASKPASS_DIR" "$SUDO_ASKPASS"
-    bash -c "cat > '$SUDO_ASKPASS'" <<<"$SUDO_PASSWORD_SCRIPT"
+    zsh -c "cat > '$SUDO_ASKPASS'" <<<"$SUDO_PASSWORD_SCRIPT"
     unset SUDO_PASSWORD_SCRIPT
     reset_debug
 
