@@ -47,32 +47,25 @@ pushit() {
 }
 
 #-------------------------------------------------------------------------------
+# Sync
 echo && echo "${yellow}Syncing ~/dotfiles to ~/zmac${reset}" && echo
 sleep 1
 
-# sync system dotfiles & backup scriptswith zmac since they should match,
-# excluding .git
+# sync system dotfiles with zmac since they should match, excluding .git
 # Note that this is one-way and I should only ever edit files in ~/.dotfiles
 sudo rsync -rtu --exclude '.git' ~/.dotfiles/ ~/zmac/dotfiles/ --progress
 sleep 1
 
 #-------------------------------------------------------------------------------
-# Push repos to Github
+# Push
 
 echo "" && echo "${yellow}Pushing ~/.dotfiles to Github${reset}"
 cd ~/.dotfiles && pushit
-sleep 0.5
 
 echo "" && echo "${yellow}Pushing ~/.backup-scripts to Github${reset}"
 cd ~/.backup-scripts && pushit
-sleep 0.5
 
 echo "" && echo "${yellow}Pushing ~/zmac to Github${reset}"
 cd ~/zmac && pushit
-sleep 0.5
-
-echo "" && echo "${yellow}Pushing ~/zmac to Github${reset}"
-cd ~/zmac && pushit
-sleep 0.5
 
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
