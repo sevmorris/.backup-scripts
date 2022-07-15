@@ -10,7 +10,7 @@
 #______________________________________________________________________________#
 
 bold=$(tput bold)
-info=$(tput setaf 3)
+yellow=$(tput setaf 3)
 reset=$(tput sgr0)
 
 # Push current directory to Github
@@ -22,8 +22,9 @@ pushit() {
   git push 2>&1
 }
 
+# Just a bold yellow arrow
 arrow() {
-  echo "${info}${bold}>>> ${reset}$*"
+  echo "${yellow}${bold}>>> ${reset}$*"
 }
 
 #-------------------------------------------------------------------------------
