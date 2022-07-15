@@ -47,14 +47,14 @@ pushit() {
 }
 
 #-------------------------------------------------------------------------------
-echo && echo "${yellow}Syncing ~/dotfiles to ~/macstrap${reset}" && echo
+echo && echo "${yellow}Syncing ~/dotfiles to ~/zmac${reset}" && echo
 sleep 1
 
-# sync system dotfiles & backup scriptswith macstrap since they should match,
+# sync system dotfiles & backup scriptswith zmac since they should match,
 # excluding .git
 # Note that this is one-way and I should only ever edit files in ~/.dotfiles
-sudo rsync -rtu --exclude '.git' ~/.dotfiles/ ~/macstrap/dotfiles/ --progress
-sudo rsync -rtu --exclude '.git' ~/.backup-scripts/ ~/macstrap/scripts/backup-scripts/ --progress
+sudo rsync -rtu --exclude '.git' ~/.dotfiles/ ~/zmac/dotfiles/ --progress
+sudo rsync -rtu --exclude '.git' ~/.backup-scripts/ ~/zmac/scripts/backup-scripts/ --progress
 sleep 1
 
 #-------------------------------------------------------------------------------
@@ -68,8 +68,8 @@ echo "" && echo "${yellow}Pushing ~/.backup-scripts to Github${reset}"
 cd ~/.backup-scripts && pushit
 sleep 0.5
 
-echo "" && echo "${yellow}Pushing ~/macstrap to Github${reset}"
-cd ~/macstrap && pushit
+echo "" && echo "${yellow}Pushing ~/zmac to Github${reset}"
+cd ~/zmac && pushit
 sleep 0.5
 
 echo "" && echo "${yellow}Pushing ~/zmac to Github${reset}"
