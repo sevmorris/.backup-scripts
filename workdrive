@@ -35,10 +35,14 @@
                 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#
 
 
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+reset=$(tput sgr0)
+
 # Sync my working drive with the identical backup, excluding some unnecessary files
 sudo rsync -a --info=progress2 --delete --exclude 'ARCHIVE SOURCE' --exclude '.fseventsd' --exclude '.Trashes' --exclude '.DS_Store' --exclude '.Spotlight-V100' --exclude '.TemporaryItems' /Volumes/Working/ /Volumes/Working_backup/
 
-echo "---"
+echo "${yellow}–––––––––––––––––––––––––––${reset}"
 echo "Work drive backup complete!"
 echo "workdrive " `date +"%y%m%d %r"` >> ~/Library/Logs/manual-backups.log
-echo "---"
+echo "${yellow}–––––––––––––––––––––––––––${reset}"

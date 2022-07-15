@@ -46,11 +46,6 @@ pushit() {
   git push 2>&1
 }
 
-# Just a bold yellow arrow
-arrow() {
-  echo "${yellow}${bold}>>> ${reset}$*"
-}
-
 #-------------------------------------------------------------------------------
 echo && echo "${yellow}Syncing dotfiles to macstrap${reset}" && echo
 sleep 1
@@ -63,7 +58,7 @@ sudo rsync -rtu --exclude '.git' ~/.backup-scripts/ ~/macstrap/scripts/backup-sc
 sleep 1
 
 #-------------------------------------------------------------------------------
-# Push repos to Github using function pushit, which is located in .zshrc
+# Push repos to Github
 
 echo && echo "${yellow}Pushing .dotfiles to Github${reset}"
 cd ~/.dotfiles && pushit
