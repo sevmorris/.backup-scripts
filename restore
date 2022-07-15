@@ -9,207 +9,53 @@
 #_____     \____/                                                      ________#
 #______________________________________________________________________________#
 
-# Most of this code was copy/pasted from Mike McQuaid's Strap repository
-# https://github.com/MikeMcQuaid/strap
+                #@@@@@@@^^~~~~~~~~~~~~~~~~~~~~^@@@@@@@@@#
+                #@@@@@@^     ~^  @  @@ @ @ @ I  ~^@@@@@@#
+                #@@@@@            ~ ~~ ~I          @@@@@#
+                #@@@@'                  '  _,w@<    @@@@#
+                #@@@@     @@@@@@@@w___,w@@@@@@@@  @  @@@#
+                #@@@@     @@@@@@@@@@@@@@@@@@@@@@  I  @@@#
+                #@@@@     @@@@@@@@@@@@@@@@@@@@*@[ i  @@@#
+                #@@@@     @@@@@@@@@@@@@@@@@@@@[][ | ]@@@#
+                #@@@@     ~_,,_ ~@@@@@@@~ ____~ @    @@@#
+                #@@@@    _~ ,  ,  `@@@~  _  _`@ ]L  J@@@#
+                #@@@@  , @@w@ww+   @@@ww``,,@w@ ][  @@@@#
+                #@@@@,  @@@@www@@@ @@@@@@@ww@@@@@[  @@@@#
+                #@@@@@_|| @@@@@@P' @@P@@@@@@@@@@@[|c@@@@#
+                #@@@@@@w| '@@P~  P]@@@-~, ~Y@@^'],@@@@@@#
+                #@@@@@@@[   _        _J@@Tk     ]]@@@@@@#
+                #@@@@@@@@,@ @@, c,,,,,,,y ,w@@[ ,@@@@@@@#
+                #@@@@@@@@@ i @w   ====--_@@@@@  @@@@@@@@#
+                #@@@@@@@@@@`,P~ _ ~^^^^Y@@@@@  @@@@@@@@@#
+                #@@@@^^=^@@^   ^' ,ww,w@@@@@ _@@@@@@@@@@#
+                #@@@_xJ~ ~   ,    @@@@@@@P~_@@@@@@@@@@@@#
+                #@@   @,   ,@@@,_____   _,J@@@@@@@@@@@@@#
+                #@@L  `' ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#
+                #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#
 
-#. . . . . . . . . . . . . . . . _,,,--~~~~~~~~--,_
-#. . . . . . . . . . . . . . ,-' : : : :::: :::: :: : : : : :º '-, ITS A TRAP!
-#. . . . . . . . . . . . .,-' :: : : :::: :::: :::: :::: : : :o : '-,
-#. . . . . . . . . . . ,-' :: ::: :: : : :: :::: :::: :: : : : : :O '-,
-#. . . . . . . . . .,-' : :: :: :: :: :: : : : : : , : : :º :::: :::: ::';
-#. . . . . . . . .,-' / / : :: :: :: :: : : :::: :::-, ;; ;; ;; ;; ;; ;; ;\
-#. . . . . . . . /,-',' :: : : : : : : : : :: :: :: : '-, ;; ;; ;; ;; ;; ;;|
-#. . . . . . . /,',-' :: :: :: :: :: :: :: : ::_,-~~,_'-, ;; ;; ;; ;; |
-#. . . . . _/ :,' :/ :: :: :: : : :: :: _,-'/ : ,-';'-'''''~-, ;; ;; ;;,'
-#. . . ,-' / : : : : : : ,-''' : : :,--'' :|| /,-'-'--'''__,''' \ ;; ;,-'/
-#. . . \ :/,, : : : _,-' --,,_ : : \ :\ ||/ /,-'-'x### ::\ \ ;;/
-#. . . . \/ /---'''' : \ #\ : :\ : : \ :\ \| | : (O##º : :/ /-''
-#. . . . /,'____ : :\ '-#\ : \, : :\ :\ \ \ : '-,___,-',-`-,,
-#. . . . ' ) : : : :''''--,,--,,,,,,¯ \ \ :: ::--,,_''-,,'''¯ :'- :'-,
-#. . . . .) : : : : : : ,, : ''''~~~~' \ :: :: :: :'''''¯ :: ,-' :,/\
-#. . . . .\,/ /|\\| | :/ / : : : : : : : ,'-, :: :: :: :: ::,--'' :,-' \ \
-#. . . . .\\'|\\ \|/ '/ / :: :_--,, : , | )'; :: :: :: :,-'' : ,-' : : :\ \,
-#. . . ./¯ :| \ |\ : |/\ :: ::----, :\/ :|/ :: :: ,-'' : :,-' : : : : : : ''-,,
-#. . ..| : : :/ ''-(, :: :: :: '''''~,,,,,'' :: ,-'' : :,-' : : : : : : : : :,-'''\\
-#. ,-' : : : | : : '') : : :¯''''~-,: : ,--''' : :,-'' : : : : : : : : : ,-' :¯'''''-,_ .
-#./ : : : : :'-, :: | :: :: :: _,,-''''¯ : ,--'' : : : : : : : : : : : / : : : : : : :''-,
-#/ : : : : : -, :¯'''''''''''¯ : : _,,-~'' : : : : : : : : : : : : : :| : : : : : : : : :
-#: : : : : : : :¯''~~~~~~''' : : : : : : : : : : : : : : : : : : | : : : : : : : : :
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+reset=$(tput sgr0)
+
+# Just a bold yellow arrow
+arrow() {
+  echo "${yellow}${bold}>>> ${reset}$*"
+}
 
 #-------------------------------------------------------------------------------
-#Copyright (C) 2015 by Mike McQuaid
-
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-
-#The above copyright notice and this permission notice shall be included in
-#all copies or substantial portions of the Software.
-
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#THE SOFTWARE.
-#-------------------------------------------------------------------------------
-
-
-sudo_askpass() {
-  if [ -n "$SUDO_ASKPASS" ]; then
-    sudo --askpass "$@"
-  else
-    sudo "$@"
-  fi
-}
-
-cleanup() {
-  set +e
-  sudo_askpass rm -rf "$CLT_PLACEHOLDER" "$SUDO_ASKPASS" "$SUDO_ASKPASS_DIR"
-  sudo --reset-timestamp
-  if [ -z "$TRAP_SUCCESS" ]; then
-    if [ -n "$TRAP_STEP" ]; then
-      echo "!!! $TRAP_STEP FAILED" >&2
-    else
-      echo "!!! FAILED" >&2
-    fi
-    if [ -z "$TRAP_DEBUG" ]; then
-      echo "!!! Run '$0 --debug' for debugging output." >&2
-    fi
-  fi
-}
-
-trap "cleanup" EXIT
-
-if [ -n "$TRAP_DEBUG" ]; then
-  set -x
-else
-  TRAP_QUIET_FLAG="-q"
-  Q="$TRAP_QUIET_FLAG"
-fi
-
-STDIN_FILE_DESCRIPTOR="0"
-[ -t "$STDIN_FILE_DESCRIPTOR" ] && TRAP_INTERACTIVE="1"
-
-# We want to always prompt for sudo password at least once rather than doing
-# root stuff unexpectedly.
-sudo --reset-timestamp
-
-# functions for turning off debug for use when handling the user password
-clear_debug() {
-  set +x
-}
-
-reset_debug() {
-  if [ -n "$TRAP_DEBUG" ]; then
-    set -x
-  fi
-}
-
-# Initialise (or reinitialise) sudo to save unhelpful prompts later
-sudo_init() {
-  if [ -z "$TRAP_INTERACTIVE" ]; then
-    return
-  fi
-
-  local SUDO_PASSWORD SUDO_PASSWORD_SCRIPT
-
-  if ! sudo --validate --non-interactive &>/dev/null; then
-    while true; do
-      read -rsp "--> Enter your password (for sudo access):" SUDO_PASSWORD
-      echo
-      if sudo --validate --stdin 2>/dev/null <<<"$SUDO_PASSWORD"; then
-        break
-      fi
-
-      unset SUDO_PASSWORD
-      echo "!!! Wrong password!" >&2
-    done
-
-    clear_debug
-    SUDO_PASSWORD_SCRIPT="$(
-      cat <<ZSH
-#!/bin/zsh
-echo "$SUDO_PASSWORD"
-ZSH
-    )"
-    unset SUDO_PASSWORD
-    SUDO_ASKPASS_DIR="$(mktemp -d)"
-    SUDO_ASKPASS="$(mktemp "$SUDO_ASKPASS_DIR"/TRAP-askpass-XXXXXXXX)"
-    chmod 700 "$SUDO_ASKPASS_DIR" "$SUDO_ASKPASS"
-    zsh -c "cat > '$SUDO_ASKPASS'" <<<"$SUDO_PASSWORD_SCRIPT"
-    unset SUDO_PASSWORD_SCRIPT
-    reset_debug
-
-    export SUDO_ASKPASS
-  fi
-}
-
-sudo_refresh() {
-  clear_debug
-  if [ -n "$SUDO_ASKPASS" ]; then
-    sudo --askpass --validate
-  else
-    sudo_init
-  fi
-  reset_debug
-}
-
-abort() {
-  TRAP_STEP=""
-  echo "!!! $*" >&2
-  exit 1
-}
-
-log() {
-  TRAP_STEP="$*"
-  sudo_refresh
-  echo "--> $*"
-}
-
-logn() {
-  TRAP_STEP="$*"
-  sudo_refresh
-  printf -- "--> %s " "$*"
-}
-
-logk() {
-  TRAP_STEP=""
-  echo "OK"
-}
-
-[ "$USER" = "root" ] && abort "Run TRAP as yourself, not root."
-groups | grep $Q -E "\b(admin)\b" || abort "Add $USER to the admin group."
-
-#-------------------------------------------------------------------------------
-logn "Running restore script:"
-echo ""
+echo "Running restore script" && echo
 sleep 1
 
 #-------------------------------------------------------------------------------
-logn "Restoring to ~/Library/Saved Application State"
-echo ""
+echo && arrow "Restoring to ${yellow}~/Library/Saved Application State${reset}" && echo
 sleep 1
 
-sudo_askpass rsync -av ~/.backup/Saved\ Application\ State/ ~/Library/Saved\ Application\ State/
-
-logk
-sleep 1
+sudo rsync -av ~/.backup/Saved\ Application\ State/ ~/Library/Saved\ Application\ State/
 
 #-------------------------------------------------------------------------------
-logn "Restoring ~/Library/Preferences"
-echo ""
+echo && arrow "Restoring ${yellow}~/Library/Preferences${reset}" && echo
 sleep 1
 
-sudo_askpass rsync -av ~/.backup/Preferences/ ~/Library/Preferences/
+sudo rsync -av ~/.backup/Preferences/ ~/Library/Preferences/
 
-logk
-sleep 1
-
-#-------------------------------------------------------------------------------
-TRAP_SUCCESS="1"
-log "Succesfully restored!"
+echo "${yellow}${bold}Restore succesful${reset}"
