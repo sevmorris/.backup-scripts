@@ -23,7 +23,7 @@ pushit() {
 }
 
 arrow() {
-  echo "--> $*"
+  echo "${info}--> ${reset}$*"
 }
 
 #-------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ sleep 1
 #-------------------------------------------------------------------------------
 # Push repos to Github using function pushit, which is located in .zshrc
 
-echo "" && ${info} arrow ${reset} "Pushing .dotfiles to Github"
+echo "" && arrow "Pushing .dotfiles to Github"
 cd ~/.dotfiles && pushit
 sleep 0.5
 
