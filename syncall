@@ -54,7 +54,6 @@ sleep 1
 # excluding .git
 # Note that this is one-way and I should only ever edit files in ~/.dotfiles
 sudo rsync -rtu --exclude '.git' ~/.dotfiles/ ~/zmac/dotfiles/ --progress
-sudo rsync -rtu --exclude '.git' ~/.backup-scripts/ ~/zmac/scripts/backup-scripts/ --progress
 sleep 1
 
 #-------------------------------------------------------------------------------
