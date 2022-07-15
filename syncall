@@ -58,6 +58,7 @@
 #THE SOFTWARE.
 #-------------------------------------------------------------------------------
 
+set +x
 
 sudo_askpass() {
   if [ -n "$SUDO_ASKPASS" ]; then
@@ -200,7 +201,7 @@ logn "Syncing dotfiles to macstrap:"
 echo ""
 sleep 1
 
-# sync system dotfiles & backup scriptswith macstrap since they should match, 
+# sync system dotfiles & backup scriptswith macstrap since they should match,
 # excluding .git
 # Note that this is one-way and I should only ever edit files in ~/.dotfiles
 sudo_askpass rsync -rtu --exclude '.git' ~/.dotfiles/ ~/macstrap/dotfiles/ --progress
