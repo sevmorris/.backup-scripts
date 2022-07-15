@@ -60,15 +60,15 @@ sleep 1
 #-------------------------------------------------------------------------------
 # Push repos to Github
 
-echo && echo "${yellow}Pushing ~/.dotfiles to Github${reset}"
+echo "" && echo "${yellow}Pushing ~/.dotfiles to Github${reset}"
 cd ~/.dotfiles && pushit
 sleep 0.5
 
-echo && echo "${yellow}Pushing ~/.backup-scripts to Github${reset}"
+echo "" && echo "${yellow}Pushing ~/.backup-scripts to Github${reset}"
 cd ~/.backup-scripts && pushit
 sleep 0.5
 
-echo && echo "${yellow}Pushing ~/macstrap to Github${reset}"
+echo "" && echo "${yellow}Pushing ~/macstrap to Github${reset}"
 cd ~/macstrap && pushit
 sleep 0.5
 
