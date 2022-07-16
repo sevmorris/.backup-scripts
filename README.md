@@ -3,7 +3,6 @@
 # Usage
 
 ```
-$ mkdir ~/.backup-scripts
-$ git clone https://github.com/sevmorris/.backup-scripts.git
-$ chmod +x install && ./install
+$ git clone https://github.com/sevmorris/.backup-scripts.git && cd ~/.backup-scripts
+$ chmod +x install && ./install && cd ~
 ```
