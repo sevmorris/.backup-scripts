@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+
+set -e
+
+
+BUD=$HOME/.backup-scripts
+backup=$BUD/backup
+restore=$BUD/restore
+syncall=$BUD/syncall
+workdrive=$BUD/workdrive
+BIN=$HOME/.local/bin
+
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+reset=$(tput sgr0)
+
+# Just a bold yellow arrow
+arrow() {
+  echo ""
+  echo "${yellow}${bold}>>> ${reset}$*"
+}
+
+#-------------------------------------------------------------------------------
+
+# Make the scripts executable
+for file in $BUD/{backup,restore,syncall,workdrive}; do
+    [ -r "$file" ] && [ -f "$file" ] && chmod +x "$file";
+done;
+unset file;
+
+# Create a backup scripts dir and copy files to it
+arrow "Creating a .local/bin directory for links to backup scripts"
+mkdir -p $BIN
+sleep 1
+
+# Create new symlinks
+arrow "Creating symlinks to backup scripts"
+for file in $BUD/{backup,restore,syncall,workdrive}; do
+    [ -r "$file" ] && [ -f "$file" ] && ln -sf "$file" $BIN;
+done;
+unset file;
+sleep 1
+
+#-------------------------------------------------------------------------------
+fortune | cowsay | lolcat

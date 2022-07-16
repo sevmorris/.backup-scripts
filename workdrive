@@ -43,6 +43,6 @@ reset=$(tput sgr0)
 sudo rsync -a --info=progress2 --delete --exclude 'ARCHIVE SOURCE' --exclude '.fseventsd' --exclude '.Trashes' --exclude '.DS_Store' --exclude '.Spotlight-V100' --exclude '.TemporaryItems' /Volumes/Working/ /Volumes/Working_backup/
 
 echo "${yellow}–––––––––––––––––––––––––––${reset}"
-echo "Work drive backup complete!"
+echo "Work drive backed up"
 echo "workdrive " `date +"%y%m%d %r"` >> ~/Library/Logs/manual-backups.log
 echo "${yellow}–––––––––––––––––––––––––––${reset}"

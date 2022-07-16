@@ -38,18 +38,19 @@ yellow=$(tput setaf 3)
 reset=$(tput sgr0)
 
 # Just a bold yellow arrow
-#arrow() {
-#  echo "${yellow}${bold}>>> ${reset}$*"
-#}
+arrow() {
+  echo ""
+  echo "${yellow}${bold}>>> ${reset}$*"
+}
 
 #-------------------------------------------------------------------------------
-echo "" && echo "Running backup script"
+echo "Running backup script"
 sleep 1
 
 #-------------------------------------------------------------------------------
 # Time Machine doesn't back up this folder,
 # and I may not need to, but I'm doing it anyway
-echo "" && echo "Backing up ${yellow}~/Library/Saved Application State${reset}" && echo
+arrow "Backing up ${yellow}~/Library/Saved Application State${reset}"
 sleep 1
 
 sudo rsync -av ~/Library/Saved\ Application\ State ~/.backup
@@ -57,9 +58,9 @@ sudo rsync -av ~/Library/Saved\ Application\ State ~/.backup
 #-------------------------------------------------------------------------------
 # Time Machine backs up ~/Library/Preferences,
 # but I want it backed up here as well
-echo "" && echo "Backing up ${yellow}~/Library/Preferences${reset}" && echo
+arrow "Backing up ${yellow}~/Library/Preferences${reset}"
 sleep 1
 
 sudo rsync -av ~/Library/Preferences ~/.backup
 
-echo "" && echo "${yellow}${bold}Back up succesful${reset}" && echo
+echo "${yellow}${bold}Back up succesful${reset}" && echo

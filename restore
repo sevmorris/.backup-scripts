@@ -39,21 +39,22 @@ reset=$(tput sgr0)
 
 # Just a bold yellow arrow
 arrow() {
+  echo ""
   echo "${yellow}${bold}>>> ${reset}$*"
 }
 
 #-------------------------------------------------------------------------------
-echo "Running restore script" && echo
+echo "Running restore script"
 sleep 1
 
 #-------------------------------------------------------------------------------
-echo && arrow "Restoring to ${yellow}~/Library/Saved Application State${reset}" && echo
+arrow "Restoring to ${yellow}~/Library/Saved Application State${reset}" && echo
 sleep 1
 
 sudo rsync -av ~/.backup/Saved\ Application\ State/ ~/Library/Saved\ Application\ State/
 
 #-------------------------------------------------------------------------------
-echo && arrow "Restoring ${yellow}~/Library/Preferences${reset}" && echo
+arrow "Restoring ${yellow}~/Library/Preferences${reset}" && echo
 sleep 1
 
 sudo rsync -av ~/.backup/Preferences/ ~/Library/Preferences/
