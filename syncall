@@ -54,7 +54,7 @@ pushit() {
 
 #-------------------------------------------------------------------------------
 # Sync
-arrow "${yellow}Syncing ~/dotfiles to ~/zmac${reset}"
+arrow "Syncing ~/dotfiles to ~/zmac"
 sleep 1
 
 # sync system dotfiles with zmac since they should match, excluding .git
@@ -65,13 +65,13 @@ sleep 1
 #-------------------------------------------------------------------------------
 # Push
 
-arrow "${yellow}Pushing ~/.dotfiles to Github${reset}"
+arrow "Pushing ~/.dotfiles to Github"
 cd ~/.dotfiles && pushit
 
-arrow "${yellow}Pushing ~/.backup-scripts to Github${reset}"
+arrow "Pushing ~/.backup-scripts to Github"
 cd ~/.backup-scripts && pushit
 
-arrow "${yellow}Pushing ~/zmac to Github${reset}"
+arrow "Pushing ~/zmac to Github"
 cd ~/zmac && pushit
 
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
