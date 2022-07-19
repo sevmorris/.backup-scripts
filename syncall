@@ -37,12 +37,6 @@ bold=$(tput bold)
 yellow=$(tput setaf 3)
 reset=$(tput sgr0)
 
-# Just a bold yellow arrow
-arrow() {
-  echo ""
-  echo "${yellow}${bold}>>> ${reset}$*"
-}
-
 # Push current directory to Github
 pushit() {
   DATE=$(date '+%y%m%d-%H%M')
@@ -54,7 +48,7 @@ pushit() {
 
 #-------------------------------------------------------------------------------
 # Sync
-arrow "Syncing ~/dotfiles to ~/zmac"
+echo "${yellow}${bold}Syncing ~/dotfiles to ~/zmac${reset}"
 sleep 1
 
 # sync system dotfiles with zmac since they should match, excluding .git
@@ -65,13 +59,13 @@ sleep 1
 #-------------------------------------------------------------------------------
 # Push
 
-arrow "Pushing ~/.dotfiles to Github"
+echo "${yellow}${bold}Pushing ~/.dotfiles to Github${reset}"
 cd ~/.dotfiles && pushit
 
-arrow "Pushing ~/.backup-scripts to Github"
+echo "${yellow}${bold}Pushing ~/.backup-scripts to Github${reset}"
 cd ~/.backup-scripts && pushit
 
-arrow "Pushing ~/zmac to Github"
+echo "${yellow}${bold}Pushing ~/zmac to Github${reset}"
 cd ~/zmac && pushit
 
 echo "syncall " `date +"%y%m%d %r"` >> ~/Library/Logs/github-repo-backups.log
