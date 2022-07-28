@@ -47,13 +47,10 @@ pushit() {
 }
 
 #-------------------------------------------------------------------------------
-# Sync
-echo "${yellow}${bold}Syncing ~/dotfiles to ~/zmac${reset}"
-sleep 1
-
 # sync system dotfiles with zmac since they should match, excluding .git
 # Note that this is one-way and I should only ever edit files in ~/.dotfiles
 sudo rsync -rtu --exclude '.git' ~/.dotfiles/ ~/zmac/dotfiles/ --progress
+echo "${yellow}${bold}Syncing ~/.dotfiles to ~/zmac${reset}"
 sleep 1
 
 #-------------------------------------------------------------------------------
